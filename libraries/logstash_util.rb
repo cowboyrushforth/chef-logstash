@@ -37,15 +37,13 @@ module Logstash
     platform_major_version = determine_platform_major_version(node)
     case node['platform']
     when 'ubuntu'
-	'systemd'
-
-#      if platform_major_version >= 6.10 and platform_major_version < 16
-#        'upstart'
-#      elsif platform_major_version >= 16.04
-#        'systemd'
-#      else
-#        'sysvinit'
-#      end
+      if platform_major_version >= 6.10 and platform_major_version < 16
+        'upstart'
+      elsif platform_major_version >= 16.04
+        'systemd'
+      else
+        'sysvinit'
+      end
     when 'debian'
       'sysvinit'
     when 'redhat', 'centos', 'scientific'
